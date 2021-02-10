@@ -1,6 +1,8 @@
 knetstat
 ========
 
+Support to show IP_TRANSPARENT option.
+
 Introduction
 ------------
 
@@ -12,11 +14,11 @@ Here is some sample output:
 
     $ cat /proc/net/tcpstat 
     Recv-Q Send-Q Local Address           Foreign Address         Stat Diag Options
-         0      0 127.0.0.1:6010          0.0.0.0:*               LSTN      SO_REUSEADDR=1,SO_KEEPALIVE=0,TCP_NODELAY=0
-         0      0 0.0.0.0:22              0.0.0.0:*               LSTN      SO_REUSEADDR=1,SO_KEEPALIVE=0,TCP_NODELAY=0
-         0      0 192.168.1.18:22         192.168.1.6:49537       ESTB      SO_REUSEADDR=1,SO_KEEPALIVE=1,TCP_NODELAY=1
-         0      0 127.0.0.1:6010          127.0.0.1:45462         ESTB      SO_REUSEADDR=1,SO_KEEPALIVE=0,TCP_NODELAY=1
-         0      0 127.0.0.1:45462         127.0.0.1:6010          ESTB      SO_REUSEADDR=0,SO_KEEPALIVE=1,TCP_NODELAY=1
+         0      0 127.0.0.1:6010          0.0.0.0:*               LSTN      SO_REUSEADDR=1,SO_KEEPALIVE=0,TCP_NODELAY=0,IP_TRANSPARENT=0
+         0      0 0.0.0.0:22              0.0.0.0:*               LSTN      SO_REUSEADDR=1,SO_KEEPALIVE=0,TCP_NODELAY=0,IP_TRANSPARENT=0
+         0      0 192.168.1.18:22         192.168.1.6:49537       ESTB      SO_REUSEADDR=1,SO_KEEPALIVE=1,TCP_NODELAY=1,IP_TRANSPARENT=0
+         0      0 127.0.0.1:6010          127.0.0.1:45462         ESTB      SO_REUSEADDR=1,SO_KEEPALIVE=0,TCP_NODELAY=1,IP_TRANSPARENT=0
+         0      0 127.0.0.1:45462         127.0.0.1:6010          ESTB      SO_REUSEADDR=0,SO_KEEPALIVE=1,TCP_NODELAY=1,IP_TRANSPARENT=0
 
 The "Diag" column can display the following diagnostic indicators:
 
