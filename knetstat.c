@@ -35,7 +35,9 @@
 #define PDE_DATA(i) pde_data(i)
 #endif
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,13,0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,7,0)
+#define tcp_time_stamp tcp_clock_ms()
+#elif LINUX_VERSION_CODE >= KERNEL_VERSION(4,13,0)
 #define tcp_time_stamp tcp_time_stamp_raw()
 #endif
 
