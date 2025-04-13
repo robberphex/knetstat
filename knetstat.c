@@ -41,6 +41,18 @@
 #define tcp_time_stamp tcp_time_stamp_raw()
 #endif
 
+static int is_transparent(struct sock *sk);
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,6,0)
+int is_transparent(struct sock *sk) {
+	return inet_test_bit(TRANSPARENT, sk);
+}
+#else
+int is_transparent(struct sock *sk) {
+	return inet_sk(sk)->transparent;
+}
+#endif
+
 // Labels corresponding to the TCP states defined in tcp_states.h
 static const char *const tcp_state_names[] = {
 		"NONE",
@@ -265,7 +277,7 @@ static int tcp_seq_show(struct seq_file *seq, void *v) {
 
 			seq_printf(seq, ",TCP_DEFER_ACCEPT=%d", defer);
 
-			seq_printf(seq, ",IP_TRANSPARENT=%d", inet_sk(sk)->transparent);
+			seq_printf(seq, ",IP_TRANSPARENT=%d", is_transparent(sk));
 
 		}
 		seq_printf(seq, "\n");
@@ -363,7 +375,7 @@ static int udp_seq_show(struct seq_file *seq, void *v) {
 
 		seq_printf(seq, ",SO_BROADCAST=%d", sock_flag(sk, SOCK_BROADCAST));
 
-		seq_printf(seq, ",IP_TRANSPARENT=%d", inet_sk(sk)->transparent);
+		seq_printf(seq, ",IP_TRANSPARENT=%d", is_transparent(sk));
 
 		seq_printf(seq, "\n");
 	}
