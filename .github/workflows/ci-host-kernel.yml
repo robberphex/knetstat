@@ -22,5 +22,12 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install linux-headers-$(uname -r) make gcc
     - name: Build
+      run: make -C /lib/modules/`uname -r`/build M="$PWD" modules
+    - name: module install
+      run: sudo make -C /lib/modules/`uname -r`/build M="$PWD" modules_install
+    - name: load module
       run: |
-        make
+        sudo depmod
+        sudo modprobe knetstat
+    - name: test module
+      run: cat /proc/net/tcpstat
