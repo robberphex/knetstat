@@ -1,11 +1,7 @@
-KSRC ?= /lib/modules/$(shell uname -r)/build
+KDIR ?= /lib/modules/`uname -r`/build
 
-KBUILD_EXTRA_SYMBOLS := $(KSRC)/Module.symvers
-
-obj-m += knetstat.o
-
-all:
-	make -C $(KSRC) M=$(PWD) modules
+kbuild:
+	make -C $(KDIR) M=`pwd`
 
 clean:
-	make -C $(KSRC) M=$(PWD) clean
+	make -C $(KDIR) M=`pwd` clean
