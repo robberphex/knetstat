@@ -1,0 +1,33 @@
+name: Build with host kernel
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+        - "ubuntu-22.04"
+        - "ubuntu-24.04"
+    name: "${{ matrix.os }}"
+    runs-on: "${{ matrix.os }}"
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install dependencies
+      run: sudo apt-get install linux-headers-$(uname -r) make gcc
+    - name: Build
+      run: make -C /lib/modules/`uname -r`/build M="$PWD" modules
+    - name: module install
+      run: sudo make -C /lib/modules/`uname -r`/build M="$PWD" modules_install
+    - name: load module
+      run: |
+        sudo depmod
+        sudo modprobe knetstat
+    - name: test module
+      run: cat /proc/net/tcpstat

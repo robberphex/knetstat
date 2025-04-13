@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Build from kernel source
 
 on:
   push:
@@ -12,24 +12,21 @@ jobs:
       fail-fast: false
       matrix:
         kernel:
-        - 4.4.260
-        - 4.9.260
-        - 4.14.224
-        - 4.19.179
-        - 5.4.104
-        - 5.10.22
-        - 5.11.6
-        - 5.16
-        - 5.17
+        - "5.17"
+        - "5.19"
+        - "6.0"
+        - "6.1"
     name: "Linux ${{ matrix.kernel }}"
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Install dependencies
-      run: sudo apt-get install libelf-dev
+      run: sudo apt-get install libelf-dev bc
     - name: Download kernel sources
-      run: curl https://cdn.kernel.org/pub/linux/kernel/$(echo ${{ matrix.kernel }} | sed -E 's/([^.]+)[.].*/v\1.x/')/linux-${{ matrix.kernel }}.tar.xz | tar xJ
+      run: |
+        echo https://cdn.kernel.org/pub/linux/kernel/$(echo ${{ matrix.kernel }} | sed -E 's/([^.]+)[.].*/v\1.x/')/linux-${{ matrix.kernel }}.tar.xz
+        curl https://cdn.kernel.org/pub/linux/kernel/$(echo ${{ matrix.kernel }} | sed -E 's/([^.]+)[.].*/v\1.x/')/linux-${{ matrix.kernel }}.tar.xz | tar xJ
     - name: Configure kernel sources
       run: |
         cp /boot/config-$(uname -r) linux-${{ matrix.kernel }}/.config
