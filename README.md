@@ -45,7 +45,7 @@ TCP_KEEPIDLE, TCP_KEEPCNT and TCP_KEEPINTVL correspond to tcp_keepalive_time, tc
 Compatibility
 -------------
 
-The current knetstat code has been successfully tested with kernel versions 3.13, 3.18, 4.4, 4.8, 4.9 and 4.15. It may work with other versions as well.
+The current knetstat code has been successfully tested with kernel versions 5.17, 1.19, 6.0, 6.1. It may work with other versions as well.
 
 Build
 -----
