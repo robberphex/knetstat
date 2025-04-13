@@ -32,7 +32,9 @@ Currently supported features
 ----------------------------
 
 * Protocols: TCP and UDP (IPv4 and IPv6)
-* Socket options: `SO_REUSEADDR`, `SO_REUSEPORT`, `SO_KEEPALIVE` (TCP), `TCP_KEEPIDLE` (TCP), `TCP_KEEPCNT` (TCP), `TCP_KEEPINTVL` (TCP), `SO_RCVBUF`, `SO_SNDBUF`, `SO_RCVTIMEO`, `SO_SNDTIMEO`, `SO_LINGER` (TCP), `TCP_NODELAY`, `TCP_FASTOPEN`, `TCP_DEFER_ACCEPT`, `SO_BROADCAST` (UDP)
+* Socket options:
+  - `IP_TRANSPARENT`
+  - `SO_REUSEADDR`, `SO_REUSEPORT`, `SO_KEEPALIVE` (TCP), `TCP_KEEPIDLE` (TCP), `TCP_KEEPCNT` (TCP), `TCP_KEEPINTVL` (TCP), `SO_RCVBUF`, `SO_SNDBUF`, `SO_RCVTIMEO`, `SO_SNDTIMEO`, `SO_LINGER` (TCP), `TCP_NODELAY`, `TCP_FASTOPEN`, `TCP_DEFER_ACCEPT`, `SO_BROADCAST` (UDP)
 
 TCP Keepalive Parameter Handling
 --------------------------------
